@@ -1,0 +1,17 @@
+$kind: http-request
+url: http://localhost:8080/api/courses
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"courseCode\": \"CIT-4040\",\r
+
+    \  \"title\": \"Backend Development\",\r
+
+    \  \"description\": \"Advanced server-side programming and architecture.\",\r
+
+    \  \"credits\": 3\r
+
+    }"
+order: 442171472668688

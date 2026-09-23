@@ -1,0 +1,19 @@
+$kind: http-request
+url: http://localhost:8080/api/students
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"studentNumber\": \"20240000\",\r
+
+    \  \"firstName\": \"John\",\r
+
+    \  \"lastName\": \"Doe\",\r
+
+    \  \"email\": \"john.doe@university.edu\",\r
+
+    \  \"academicYear\": 3\r
+
+    }"
+order: 1790191305341

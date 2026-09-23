@@ -1,0 +1,86 @@
+### Variables
+@host = http://localhost:8080
+
+---
+### 1. Create a Student (POST /api/students)
+POST {{host}}/api/students
+Content-Type: application/json
+
+{
+  "studentNumber": "S-2026-001",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@university.edu",
+  "academicYear": 2
+}
+
+### 2. Get a Student by ID (GET /api/students/{id})
+GET {{host}}/api/students/1
+
+### 3. Update a Student (PUT /api/students/{id})
+PUT {{host}}/api/students/1
+Content-Type: application/json
+
+{
+  "studentNumber": "S-2026-001",
+  "firstName": "Johnathan",
+  "lastName": "Doe",
+  "email": "john.doe@university.edu",
+  "academicYear": 3
+}
+
+### 4. Create a Course (POST /api/courses)
+POST {{host}}/api/courses
+Content-Type: application/json
+
+{
+  "courseCode": "CS-404",
+  "title": "Backend Development",
+  "description": "Advanced server-side programming and architecture.",
+  "credits": 4
+}
+
+### 5. Get a Course by ID (GET /api/courses/{id})
+GET {{host}}/api/courses/1
+
+### 6. Update a Course (PUT /api/courses/{id})
+PUT {{host}}/api/courses/1
+Content-Type: application/json
+
+{
+  "courseCode": "CS-404",
+  "title": "Backend Development & APIs",
+  "description": "Advanced server-side programming and architecture.",
+  "credits": 4
+}
+
+### 7. Enroll a Student in a Course (POST /api/enrollments)
+# This is the endpoint that triggers the business rule if executed twice
+POST {{host}}/api/enrollments
+Content-Type: application/json
+
+{
+  "studentId": 1,
+  "courseId": 1,
+  "semester": "Fall 2026"
+}
+
+### 8. Get a Student's Schedule (GET /api/students/{id}/schedule)
+# Report endpoint (Beyond plain CRUD)
+GET {{host}}/api/students/1/schedule
+
+### 9. List All Competencies (GET /api/competencies)
+GET {{host}}/api/competencies
+
+### 10. Search Courses by Competency (GET /api/courses/search?competency={name})
+# Filter endpoint (Beyond plain CRUD)
+GET {{host}}/api/courses/search?competency=Programming
+
+### 11. Drop a Course Enrollment (DELETE /api/enrollments/{id})
+DELETE {{host}}/api/enrollments/1
+
+### 12. Delete a Course (DELETE /api/courses/{id})
+DELETE {{host}}/api/courses/1
+
+### 13. Delete a Student (DELETE /api/students/{id})
+DELETE {{host}}/api/students/1

@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:8080/api/enrollments
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"studentId\": 1,\r
+
+    \  \"courseId\": 1,\r
+
+    \  \"semester\": \"Fall 2026\"\r
+
+    }"
+order: 2384806104434304
