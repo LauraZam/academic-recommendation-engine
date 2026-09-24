@@ -1,5 +1,6 @@
 package com.university.edtech.controller;
 
+import com.university.edtech.dto.CourseResponseDto;
 import com.university.edtech.dto.StudentRequestDto;
 import com.university.edtech.dto.StudentResponseDto;
 import com.university.edtech.service.StudentService;
@@ -34,5 +35,10 @@ public class StudentController {
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build(); // Returns 204 No Content
+    }
+
+    @GetMapping("/{id}/schedule")
+    public ResponseEntity<java.util.List<CourseResponseDto>> getStudentSchedule(@PathVariable Long id) {
+        return ResponseEntity.ok(studentService.getStudentSchedule(id));
     }
 }
