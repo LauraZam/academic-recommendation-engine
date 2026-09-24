@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    private final com.university.edtech.repository.EnrollmentRepository enrollmentRepository; // Add this line
 
     @Transactional
     public CourseResponseDto createCourse(CourseRequestDto dto) {
@@ -65,5 +66,20 @@ public class CourseService {
                 course.getTitle(),
                 course.getCredits()
         );
+    }
+
+    @Transactional(readOnly = true)
+    public long getCourseEnrollmentCount(Long courseId) {
+        if (!courseRepository.existsById(courseId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found");
+        }
+        return enrollmentRepository.countByCourseId(courseId);
+    }
+
+    @Transactional(readOnly = true)
+    public java.util.List<CourseResponseDto> searchCourses(String keyword) {
+        return courseRepository.findByTitleContainingIgnoreCase(keyword).stream()
+                .map(this::mapToResponseDto)
+                .toList();
     }
 }

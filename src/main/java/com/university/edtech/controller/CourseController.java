@@ -35,4 +35,14 @@ public class CourseController {
         courseService.deleteCourse(id);
         return ResponseEntity.noContent().build(); // Returns 204 No Content
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<java.util.List<CourseResponseDto>> searchCourses(@RequestParam String keyword) {
+        return ResponseEntity.ok(courseService.searchCourses(keyword));
+    }
+
+    @GetMapping("/{id}/enrollment-count")
+    public ResponseEntity<Long> getEnrollmentCount(@PathVariable Long id) {
+        return ResponseEntity.ok(courseService.getCourseEnrollmentCount(id));
+    }
 }

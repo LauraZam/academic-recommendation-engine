@@ -1,5 +1,6 @@
 package com.university.edtech.service;
 
+import com.university.edtech.dto.CourseResponseDto;
 import com.university.edtech.dto.StudentRequestDto;
 import com.university.edtech.dto.StudentResponseDto;
 import com.university.edtech.model.Student;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -70,5 +73,23 @@ public class StudentService {
                 student.getEmail(),
                 student.getAcademicYear()
         );
+    }
+
+    @Transactional(readOnly = true)
+    public List<CourseResponseDto> getStudentSchedule(Long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found"));
+
+        return student.getEnrollments().stream()
+                .map(enrollment -> {
+                    var course = enrollment.getCourse();
+                    return new CourseResponseDto(
+                            course.getId(),
+                            course.getCourseCode(),
+                            course.getTitle(),
+                            course.getCredits()
+                    );
+                })
+                .toList();
     }
 }
